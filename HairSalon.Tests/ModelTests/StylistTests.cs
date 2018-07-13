@@ -16,7 +16,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void Equals_ReturnsTrueIfNamesAreTheSame_Stylist () {
+        public void Equals_ReturnsTrueIfNamesAreTheSame_True () {
             // Arrange, Act
             Stylist firstStylist = new Stylist ("John");
             Stylist secondStylist = new Stylist ("John");
@@ -36,7 +36,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void Save_SavesToDatabase_StylistList () {
+        public void Save_SavesStylistToDatabase_True () {
             //Arrange
             Stylist testStylist = new Stylist ("Mo");
 
@@ -48,5 +48,56 @@ namespace HairSalon.Tests {
             //Assert
             CollectionAssert.AreEqual (testList, result);
         }
+
+        [TestMethod]
+        public void GetAll_ReturnsAllStylists_True () {
+            //Arrange
+            Stylist newStylist1 = new Stylist ("stylist01");
+            newStylist1.Save ();
+            Stylist newStylist2 = new Stylist ("stylist02");
+            newStylist2.Save ();
+            //Act
+
+            List<Stylist> twoStylists = new List<Stylist> { newStylist1, newStylist2 };
+            List<Stylist> result = Stylist.GetAll ();
+
+            //Assert
+            CollectionAssert.AreEqual (twoStylists, result);
+            Console.WriteLine (result.Count);
+            Console.WriteLine (twoStylists.Count);
+        }
+
+        [TestMethod]
+        public void Find_ReturnsFoundStylistsFromDatabase_FoundStylist () {
+            //Arrange
+            Stylist testStylist = new Stylist ("Stylist");
+            testStylist.Save ();
+
+            //Act
+            Stylist foundStylist = Stylist.Find (testStylist.GetId ());
+
+            //Assert
+            Assert.AreEqual (testStylist, foundStylist);
+        }
+
+        [TestMethod]
+        public void DeleteStylist_DeletesOneStylist_True () {
+            //Arrange
+            Stylist newStylist1 = new Stylist ("stylist01");
+            newStylist1.Save ();
+            Stylist newStylist2 = new Stylist ("stylist02");
+            newStylist2.Save ();
+            Stylist newStylist3 = new Stylist ("stylist03");
+            newStylist2.Save ();
+            //Act
+
+            List<Stylist> threeStylists = Stylist.GetAll ();
+            Stylist.DeleteStylist (newStylist2.GetId ());
+            List<Stylist> afterDelete = Stylist.GetAll ();
+
+            //Assert
+            CollectionAssert.AreNotEqual (threeStylists, afterDelete);
+        }
+
     }
 }
