@@ -31,8 +31,8 @@ namespace HairSalon.Models {
             MySqlDataReader rdr = cmd.ExecuteReader () as MySqlDataReader;
             while (rdr.Read ()) {
                 int stylistId = rdr.GetInt32 (0);
-                string stylistDescription = rdr.GetString (1);
-                Stylist newStylist = new Stylist (stylistDescription, stylistId);
+                string stylistName = rdr.GetString (1);
+                Stylist newStylist = new Stylist (stylistName, stylistId);
                 allStylists.Add (newStylist);
             }
             conn.Close ();
@@ -55,6 +55,24 @@ namespace HairSalon.Models {
 
         public override int GetHashCode () {
             return this.GetId ().GetHashCode ();
+        }
+
+        public void Save () {
+            MySqlConnection conn = DB.Connection ();
+            conn.Open ();
+
+            var cmd = conn.CreateCommand () as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO stylists (name) VALUES (@StylistName);";
+
+            cmd.Parameters.Add (new MySqlParameter ("@StylistName", _name));
+
+            cmd.ExecuteNonQuery ();
+            _id = (int) cmd.LastInsertedId;
+
+            conn.Close ();
+            if (conn != null) {
+                conn.Dispose ();
+            }
         }
 
         public static void DeleteAll () {

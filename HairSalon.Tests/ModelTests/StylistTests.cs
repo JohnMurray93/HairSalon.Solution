@@ -34,5 +34,19 @@ namespace HairSalon.Tests {
             //Assert
             Assert.AreEqual (0, result);
         }
+
+        [TestMethod]
+        public void Save_SavesToDatabase_StylistList () {
+            //Arrange
+            Stylist testStylist = new Stylist ("Mo");
+
+            //Act
+            testStylist.Save ();
+            List<Stylist> result = Stylist.GetAll ();
+            List<Stylist> testList = new List<Stylist> { testStylist };
+
+            //Assert
+            CollectionAssert.AreEqual (testList, result);
+        }
     }
 }
