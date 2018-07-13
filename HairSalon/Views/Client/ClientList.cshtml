@@ -1,0 +1,41 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>@Model["stylist"].GetName() 's clients</h1>
+
+@foreach (var client in Model["client"])
+{
+<div class="row">
+  <div class="col-md-1">
+   <p>@client.GetName()</p> 
+  </div>  
+  <div class="col-md-6">
+   <a href="/Stylists/@client.GetId()/Update">Change: <span style="color:red">Client/Name</span></a>
+  </div>
+</div>
+}
+<form action='/Stylists/@Model["stylist"].GetId()' method='post'>
+  <input id='stylist-id' name='stylist-id' type='hidden' value='@Model["stylist"].GetId()'>
+  <label for='inputClient'>Enter New Client:</label>
+  <input id='inputClient' name='inputClient' type='text' required>
+  <br>
+  <button class="btn btn-info" type='submit'>Add Client</button>
+</form>
+
+<form action="/Clients/Delete" method="post">
+  <button type="submit" class="btn btn-danger">Delete All Clients</button>
+</form>
+
+<form action="/Stylists">
+    <button type="submit" class="btn btn-info">View All Stylists</button>
+</form>
+
+<form action="/Stylists/@Model["stylist"].GetId()/Delete" method="post">
+  <button type="submit" class="btn btn-danger">Delete Stylist</button>
+</form>
+
+<form action="/">
+    <button type="submit" class="btn btn-info">Got To Homepage</button>
+</form>
+
