@@ -13,6 +13,7 @@ namespace HairSalon.Tests {
 
         public void Dispose () {
             Stylist.DeleteAll ();
+            Client.DeleteAll ();
         }
 
         [TestMethod]
@@ -99,5 +100,22 @@ namespace HairSalon.Tests {
             CollectionAssert.AreNotEqual (threeStylists, afterDelete);
         }
 
+        [TestMethod]
+        public void GetClients_GetStylistClientList_True () {
+            //Arrange
+            Stylist stylistOne = new Stylist ("Miranda", 1);
+
+            Client clientOne = new Client ("Frank", 1);
+            clientOne.Save ();
+            Client clientTwo = new Client ("Tom", 1);
+            clientTwo.Save ();
+            Client clientThree = new Client ("Gerald", 1);
+            clientThree.Save ();
+            //Act
+            int clientCount = stylistOne.GetClients ().Count;
+
+            //Assert
+            Assert.AreEqual (3, clientCount);
+        }
     }
 }
