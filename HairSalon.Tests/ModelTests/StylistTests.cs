@@ -24,5 +24,15 @@ namespace HairSalon.Tests {
             // Assert
             Assert.AreEqual (firstStylist, secondStylist);
         }
+
+        [TestMethod]
+        public void GetAll_DbStartsEmpty_0 () {
+            //Arrange
+            //Act
+            int result = Stylist.GetAll ().Count;
+
+            //Assert
+            Assert.AreEqual (0, result);
+        }
     }
 }
