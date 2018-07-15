@@ -17,7 +17,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void Equals_ReturnsTrueIfNamesAreTheSame_True () {
+        public void IsEquals_ReturnsTrueIfNamesAreTheSame_True () {
             // Arrange, Act
             Stylist firstStylist = new Stylist ("John");
             Stylist secondStylist = new Stylist ("John");
@@ -27,7 +27,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void GetAll_DbStartsEmpty_0 () {
+        public void IsGetAll_DbStartsEmpty_0 () {
             //Arrange
             //Act
             int result = Stylist.GetAll ().Count;
@@ -37,7 +37,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void Save_SavesStylistToDatabase_True () {
+        public void IsSave_SavesStylistToDatabase_True () {
             //Arrange
             Stylist testStylist = new Stylist ("Mo");
 
@@ -51,7 +51,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void GetAll_ReturnsAllStylists_True () {
+        public void IsGetAll_ReturnsAllStylists_True () {
             //Arrange
             Stylist newStylist1 = new Stylist ("stylist01");
             newStylist1.Save ();
@@ -69,7 +69,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void Find_ReturnsFoundStylistsFromDatabase_FoundStylist () {
+        public void IsFind_ReturnsFoundStylistsFromDatabase_FoundStylist () {
             //Arrange
             Stylist testStylist = new Stylist ("Stylist");
             testStylist.Save ();
@@ -82,7 +82,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void DeleteStylist_DeletesOneStylist_True () {
+        public void IsDeleteStylist_DeletesOneStylist_True () {
             //Arrange
             Stylist newStylist1 = new Stylist ("stylist01");
             newStylist1.Save ();
@@ -101,7 +101,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void GetClients_GetStylistClientList_True () {
+        public void IsGetClients_GetStylistClientList_True () {
             //Arrange
             Stylist stylistOne = new Stylist ("Miranda", 1);
 

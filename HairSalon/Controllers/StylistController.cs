@@ -23,14 +23,14 @@ namespace HairSalon.Controllers {
         public ActionResult YoureFired (int id) {
             Stylist.DeleteStylist (id);
             Client.DeleteClients (id);
-            return View ("Index");
+            return RedirectToAction ("Stylists");
         }
 
         [HttpPost ("/Stylists/Delete")]
         public ActionResult YoureAllFired () {
             Client.DeleteAll ();
             Stylist.DeleteAll ();
-            return View ("Index");
+            return RedirectToAction ("Stylists");
         }
     }
 }

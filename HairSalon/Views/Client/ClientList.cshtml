@@ -11,7 +11,7 @@
    <p>@client.GetName()</p> 
   </div>  
   <div class="col-md-6">
-   <a href="/Stylists/@client.GetId()/Update">Change: <span style="color:red">Client/Name</span></a>
+   <a href="/Client/@client.GetId()/Update">Edit</a>
   </div>
 </div>
 }
@@ -24,7 +24,12 @@
 </form>
 
 <form action="/Clients/Delete" method="post">
-  <button type="submit" class="btn btn-danger">Delete All Clients</button>
+  @if (@Model["client"].Count !=  0) 
+  {
+    <button type="submit" class="btn btn-danger">Delete All Clients</button>
+  } else 
+  {
+  }
 </form>
 
 <form action="/Stylists">

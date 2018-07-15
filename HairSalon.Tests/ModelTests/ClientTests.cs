@@ -17,7 +17,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void Equals_SameClientIsSame_True () {
+        public void IsEquals_SameClientIsSame_True () {
             //Arrange, Act
             Client firstClient = new Client ("client", 1);
             Client secondClient = new Client ("client", 1);
@@ -27,7 +27,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void Save_SavesClientToDatabase_True () {
+        public void IsSave_SavesClientToDatabase_True () {
             //Arrange
             Client testClient = new Client ("client", 1);
             testClient.Save ();
@@ -41,7 +41,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void Save_DatabaseAssignsIdToObject_True () {
+        public void IsSave_DatabaseAssignsIdToObject_True () {
             //Arrange
             Client testClient = new Client ("client", 1);
             testClient.Save ();
@@ -57,7 +57,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void Find_FindClient_True () {
+        public void IsFind_FindClient_True () {
             //Arrange
             Client testClient = new Client ("client", 1);
             testClient.Save ();
@@ -70,7 +70,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void UpdateClient_UpdateClientName_True () {
+        public void IsUpdateClient_UpdateClientName_True () {
             //Arrange
             Client testClient = new Client ("Clint", 1);
             testClient.Save ();
@@ -85,7 +85,7 @@ namespace HairSalon.Tests {
         }
 
         [TestMethod]
-        public void DeleteClient_DeletesOneClient_True () {
+        public void IsDeleteClient_DeletesOneClient_True () {
             //Arrange
             Client newClient1 = new Client ("Client01", 1);
             newClient1.Save ();

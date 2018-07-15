@@ -30,23 +30,23 @@ namespace HairSalon.Controllers {
             return View ("ClientList", model);
         }
 
-        [HttpPost ("/Clients/Delete")]
-        public ActionResult DeleteClients () {
-            Client.DeleteAll ();
-            return View ("Index");
-        }
-
-        [HttpGet ("/Stylists/{id}/Update")]
+        [HttpGet ("/Client/{id}/Update")]
         public ActionResult ClientUpdate (int id) {
             Client thisClient = Client.Find (id);
             return View (thisClient);
         }
 
-        [HttpPost ("/Stylists/{id}/Update")]
+        [HttpPost ("/Client/{id}/Update")]
         public ActionResult ClientEdit (int id) {
             Client thisClient = Client.Find (id);
             thisClient.UpdateClient (Request.Form["new-name"]);
-            return RedirectToAction ("Stylists");
+            return RedirectToAction ("Stylists", "Stylist");
+        }
+
+        [HttpPost ("/Clients/Delete")]
+        public ActionResult DeleteClients () {
+            Client.DeleteAll ();
+            return RedirectToAction ("Stylists", "Stylist");
         }
 
     }
