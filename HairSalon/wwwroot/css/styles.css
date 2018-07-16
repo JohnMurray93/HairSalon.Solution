@@ -5,8 +5,3 @@
   left: 50%;
   transform: translate(-50%);
 }
-
-#client {
-    display: block;
-    margin: 50%;
-}
