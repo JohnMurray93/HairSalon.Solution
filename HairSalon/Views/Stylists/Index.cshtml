@@ -1,0 +1,30 @@
+@{ Layout = "_Layout"; }
+
+<h1>Stylists:</h1>
+@if (@Model.Count == 0) {
+<h4>No stylists have been added yet!</h4>
+} 
+@foreach (var Stylist in Model) {
+<div id="stylists">
+    <h4><a href="Stylist/@Stylist.GetId()">@Stylist.GetName()</a><br>
+        <form action="Stylist/@Stylist.GetId()/Delete" method="post">
+            <button type="submit" class="btn btn-link">Delete Stylist</button>
+        </form>
+</div>
+}
+
+<form action="Stylists" method="post">
+    <div class="form-group">
+        <label for="inputStylist">Add Stylist:</label>
+        <input class="form-control" name="inputStylist" id="inputStylist" required>
+        <button type="submit" class="btn btn-info btn-xs">Submit</button>
+    </div>
+</form>
+
+<form action="/Stylists/Delete" method="post">
+    <button type="submit" class="btn btn-danger">Delete All Stylists</button>
+</form>
+
+<form action="/">
+    <button type="submit" class="btn btn-info">Got To Homepage</button>
+</form>

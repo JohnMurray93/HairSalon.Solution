@@ -1,7 +1,49 @@
 #shared-div {
+  margin: auto;
+  display: block; 
   text-align: center;
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%);
+}
+
+#stylists {
+  margin-top: 5%
+}
+
+#inline {
+  display: inline-block;
+}
+
+body {
+  background-image: url("/img/barber-splash.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: aliceblue;
+  font-family: 'Goudy Bookletter 1911';font-size: 22px;
+  text-transform: capitalize;
+} 
+
+h1 {
+  color: aliceblue;
+}
+
+h4 {
+  color: rgb(138, 255, 249);
+}
+
+a, a:hover {
+  color:  rgb(138, 255, 249);
+}
+
+.btn {
+  color: aliceblue;
+}
+
+.btn:hover {
+  color: red;
+}
+
+.form-control {
+  width: 25%;
+  margin: auto;
 }
