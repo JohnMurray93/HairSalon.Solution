@@ -26,8 +26,8 @@ namespace HairSalon.Models {
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT client_id FROM clients_stylists WHERE stylist_id = @StylistId;";
+
+            MySqlCommand cmd = new MySqlCommand(@"SELECT client_id FROM clients_stylists WHERE stylist_id = @StylistId;", conn);
 
             cmd.Parameters.Add (new MySqlParameter ("@StylistId", _id));
 
@@ -44,8 +44,7 @@ namespace HairSalon.Models {
             List<Client> clients = new List<Client> {};
             foreach (int clientId in clientIds)
             {
-                var clientQuery = conn.CreateCommand() as MySqlCommand;
-                clientQuery.CommandText = @"SELECT * FROM clients WHERE id = @ClientId;";
+                MySqlCommand clientQuery = new MySqlCommand(@"SELECT * FROM clients WHERE id = @ClientId;", conn);
 
                 MySqlParameter clientIdParameter = new MySqlParameter();
                 clientIdParameter.ParameterName = "@ClientId";
@@ -74,8 +73,8 @@ namespace HairSalon.Models {
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO clients_stylists (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
+
+            MySqlCommand cmd = new MySqlCommand(@"INSERT INTO clients_stylists (stylist_id, client_id) VALUES (@StylistId, @ClientId);", conn);
 
             cmd.Parameters.Add (new MySqlParameter ("@StylistId", _id));
 
@@ -96,8 +95,9 @@ namespace HairSalon.Models {
             List<Stylist> allStylists = new List<Stylist> { };
             MySqlConnection conn = DB.Connection ();
             conn.Open ();
-            MySqlCommand cmd = conn.CreateCommand () as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM stylists;";
+
+            MySqlCommand cmd = new MySqlCommand(@"SELECT * FROM stylists;", conn);
+
             MySqlDataReader rdr = cmd.ExecuteReader () as MySqlDataReader;
             while (rdr.Read ()) {
                 int stylistId = rdr.GetInt32 (0);
@@ -105,10 +105,12 @@ namespace HairSalon.Models {
                 Stylist newStylist = new Stylist (stylistName, stylistId);
                 allStylists.Add (newStylist);
             }
+
             conn.Close ();
             if (conn != null) {
                 conn.Dispose ();
             }
+
             return allStylists;
         }
 
@@ -131,8 +133,7 @@ namespace HairSalon.Models {
             MySqlConnection conn = DB.Connection ();
             conn.Open ();
 
-            var cmd = conn.CreateCommand () as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO stylists (name) VALUES (@StylistName);";
+            MySqlCommand cmd = new MySqlCommand(@"INSERT INTO stylists (name) VALUES (@StylistName);", conn);
 
             cmd.Parameters.Add (new MySqlParameter ("@StylistName", _name));
 
@@ -148,8 +149,8 @@ namespace HairSalon.Models {
         public static Stylist Find (int id) {
             MySqlConnection conn = DB.Connection ();
             conn.Open ();
-            var cmd = conn.CreateCommand () as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM stylists WHERE id = (@SearchId);";
+
+            MySqlCommand cmd = new MySqlCommand(@"SELECT * FROM stylists WHERE id = (@SearchId);", conn);
 
             cmd.Parameters.Add (new MySqlParameter ("@SearchId", id));
 
@@ -167,6 +168,24 @@ namespace HairSalon.Models {
                 conn.Dispose ();
             }
             return newStylist;
+        }
+
+        public void UpdateStylist (string newStylistName) {
+            MySqlConnection conn = DB.Connection ();
+            conn.Open ();
+
+            MySqlCommand cmd = new MySqlCommand(@"UPDATE stylists SET name = @NewStylistName WHERE id = @SearchId;", conn);
+
+            cmd.Parameters.Add (new MySqlParameter ("@SearchId", _id));
+            cmd.Parameters.Add (new MySqlParameter ("@NewStylistName", newStylistName));
+
+            cmd.ExecuteNonQuery ();
+            _name = newStylistName;
+
+            conn.Close ();
+            if (conn != null) {
+                conn.Dispose ();
+            }
         }
 
         public void Delete()
@@ -190,8 +209,7 @@ namespace HairSalon.Models {
             MySqlConnection conn = DB.Connection ();
             conn.Open ();
 
-            var cmd = conn.CreateCommand () as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM stylists; Delete From clients_stylists";
+            MySqlCommand cmd = new MySqlCommand(@"DELETE FROM stylists; Delete From clients_stylists", conn);
 
             cmd.ExecuteNonQuery ();
 
@@ -204,8 +222,7 @@ namespace HairSalon.Models {
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT client_id FROM clients_stylists WHERE stylist_id = @StylistId; DELETE FROM clients_stylists WHERE stylist_id = @StylistId";
+            MySqlCommand cmd = new MySqlCommand(@"SELECT client_id FROM clients_stylists WHERE stylist_id = @StylistId; DELETE FROM clients_stylists WHERE stylist_id = @StylistId", conn);
 
             cmd.Parameters.Add (new MySqlParameter ("@StylistId", this._id));
 
@@ -222,8 +239,7 @@ namespace HairSalon.Models {
             List<Client> clients = new List<Client> {};
             foreach (int clientId in clientIds)
             {
-                var clientQuery = conn.CreateCommand() as MySqlCommand;
-                clientQuery.CommandText = @"DELETE FROM clients WHERE id = @ClientId;";
+                MySqlCommand clientQuery = new MySqlCommand(@"DELETE FROM clients WHERE id = @ClientId;", conn);
 
                 MySqlParameter clientIdParameter = new MySqlParameter();
                 clientIdParameter.ParameterName = "@ClientId";

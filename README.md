@@ -28,13 +28,20 @@ _This app allows a hair salon employee to manage a list of stylists and clients.
 
 ### Setup/Installation Requirements:
 
-- _Install MAMP_
-- _Make sure ports are set to default_
+- _Install and run MAMP_
+- _Under preferences set ports to default_
 - _Start server_
-- _Go to phpMyAdmin and import the john_murray.sql file_
-- _dotnet restore then dotnet run_
-- _Navigate to (http://localhost:5000)_
-
+- _Go to phpMyAdmin in the tools dropdown_
+- _Import the john_murray.sql and john_murray_test.sql files_
+##### Run Application
+- _Navigate to: /HairSalon.Solution/HairSalon in Terminal_
+- _Run command: $ dotnet restore_
+- _Run command: $ dotnet watch run_
+- _Navigate to: http://localhost:5000_
+##### Test Application 
+- _Navigate to: /HairSalon.Solution/HairSalon.Tests in Terminal_
+- _Run command: $ dotnet restore_
+- _Run command: $ dotnet watch test_
 ### Technologies Used:
 
 - _C#_

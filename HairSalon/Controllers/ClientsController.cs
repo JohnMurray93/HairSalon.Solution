@@ -12,14 +12,14 @@ namespace HairSalon.Controllers {
             return View (Client.GetAll ());
         }
 
-        [HttpPost ("/Clients")]
+        [HttpPost ("/Clients/NewClient")]
         public ActionResult NewClient () {
             Client newClient = new Client (Request.Form["inputClient"]);
             newClient.Save ();
             return RedirectToAction ("Index");
         }
 
-        [HttpGet ("/Client/{id}")]
+        [HttpGet ("/Client/{id}/Details")]
         public ActionResult ClientDetails (int id) {
             // Dictionary<string, object> model = new Dictionary<string, object> ();
             Client selectedClient = Client.Find (id);
@@ -29,7 +29,7 @@ namespace HairSalon.Controllers {
             return View (selectedClient);
         }
 
-        [HttpPost ("/Client/{id}")]
+        [HttpPost ("/Client/{id}/AddStylist")]
         public ActionResult AddStylist (int id) {
             Client thisClient = Client.Find (id);
             Stylist newStylist = new Stylist (Request.Form["inputName"]);

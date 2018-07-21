@@ -2,12 +2,12 @@
 
 @foreach (var Stylist in Model.GetStylists())
 {
-   <p><a class="whiteLink" href="/Stylist/@Stylist.GetId()/Details">@Stylist.GetName()</a> <a href="/Client/@Model.GetId()/Update">Edit</a>
+   <p><a class="whiteLink" href="/Stylist/@Stylist.GetId()/Details">@Stylist.GetName()</a>
    <form action="/Stylist/@Stylist.GetId()/Delete" method="post">
      <button type="submit" class="btn btn-link">Delete Stylist</button>
    </form></p>
 }
-<form action='/Client/@Model.GetId()' method='post'>
+<form action='/Client/@Model.GetId()/AddStylist' method='post'>
   <div class="form-group">
       <input class="form-control" id='stylist-id' name='stylist-id' type='hidden' value='@Model.GetId()'>
       <label for='inputName'>Enter New Stylist:</label>

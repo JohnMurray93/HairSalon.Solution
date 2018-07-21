@@ -3,13 +3,13 @@
 <h4>No clients have been added yet!</h4>
 } 
 @foreach (var Client in Model) {
-<p><a class="whiteLink" href="Client/@Client.GetId()">@Client.GetName()</a> <a href="/Client/@Client.GetId()/Update">Edit</a>
+<p><a class="whiteLink" href="/Client/@Client.GetId()/Details">@Client.GetName()</a> <a href="/Client/@Client.GetId()/Update">Edit</a>
 <form action="/Client/@Client.GetId()/Delete" method="post">
     <button type="submit" class="btn btn-link">Delete Client</button>
 </form></p>
 }
 
-<form action="Clients" method="post">
+<form action="/Clients/NewClient" method="post">
     <div class="form-group">
         <label for="inputClient">Add Client:</label>
         <input class="form-control" name="inputClient" id="inputClient" required>

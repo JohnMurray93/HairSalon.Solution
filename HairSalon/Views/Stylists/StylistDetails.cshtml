@@ -2,12 +2,12 @@
 
 @foreach (var Client in Model.GetClients())
 {
-   <p><a class="whiteLink" href="/Client/@Client.GetId()/Details">@Client.GetName()</a> <a href="/Client/@Client.GetId()/Update">Edit</a>
+   <p><a class="whiteLink" href="/Client/@Client.GetId()/Details">@Client.GetName()</a>
    <form action="Client/@Client.GetId()/Delete" method="post">
      <button type="submit" class="btn btn-link">Delete Client</button>
    </form></p>
 }
-<form action='/Stylist/@Model.GetId()' method='post'>
+<form action='/Stylist/@Model.GetId()/AddClient' method='post'>
   <div class="form-group">
       <input class="form-control" id='stylist-id' name='stylist-id' type='hidden' value='@Model.GetId()'>
       <label for='inputClient'>Enter New Client:</label>
