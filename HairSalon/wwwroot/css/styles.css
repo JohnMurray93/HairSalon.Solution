@@ -4,12 +4,8 @@
   text-align: center;
 }
 
-#stylists {
+#stylists, #clients {
   margin-top: 5%
-}
-
-#inline {
-  display: inline-block;
 }
 
 body {
@@ -46,4 +42,8 @@ a, a:hover {
 .form-control {
   width: 25%;
   margin: auto;
+}
+
+.whiteLink {
+  color: aliceblue;
 }

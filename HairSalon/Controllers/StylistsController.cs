@@ -16,16 +16,12 @@ namespace HairSalon.Controllers {
         public ActionResult NewStylist () {
             Stylist newStylist = new Stylist (Request.Form["inputStylist"]);
             newStylist.Save ();
-            return View ("Index", Stylist.GetAll ());
+            return RedirectToAction ("Index");
         }
 
         [HttpGet ("/Stylist/{id}")]
-        public ActionResult Details (int id) {
-            // Dictionary<string, object> model = new Dictionary<string, object> ();
+        public ActionResult StylistDetails (int id) {
             Stylist selectedStylist = Stylist.Find (id);
-            // List<Client> stylistClients = selectedStylist.GetClients ();
-            // model.Add ("stylist", selectedStylist);
-            // model.Add ("client", stylistClients);
             return View (selectedStylist);
         }
 
@@ -35,25 +31,25 @@ namespace HairSalon.Controllers {
             Client newClient = new Client (Request.Form["inputClient"]);
             newClient.Save ();
             thisStylist.AddClient(newClient);
-            return RedirectToAction ("Details");
+            return RedirectToAction ("StylistDetails");
         }
 
         [HttpPost ("/Stylist/{id}/Delete")]
-        public ActionResult YoureFired (int id) {
+        public ActionResult DeleteStylist (int id) {
             Stylist thisStylist = Stylist.Find (id);
             thisStylist.Delete ();
-            return RedirectToAction ("Stylists");
+            return RedirectToAction ("Index");
         }
 
         [HttpPost ("/Stylist/{id}/Clients/Delete")]
-        public ActionResult DeleteClients (int id) {
+        public ActionResult DeleteStylistClients (int id) {
             Stylist thisStylist = Stylist.Find (id);
             thisStylist.DeleteStylistClients();
             return RedirectToAction ("Index");
         }
 
         [HttpPost ("/Stylists/Delete")]
-        public ActionResult YoureAllFired () {
+        public ActionResult DeleteAllStylists () {
             Stylist.DeleteAll ();
             return RedirectToAction ("Index");
         }

@@ -1,27 +1,23 @@
-@{
-  Layout = "_Layout";
-}
+<h1>@Model.GetName()'s clients</h1>
 
-<h1>@Model["stylist"].GetName()'s clients</h1>
-
-@foreach (var client in Model["client"])
+@foreach (var Client in Model.GetClients())
 {
-   <p id="inline">@client.GetName() <a href="/Client/@client.GetId()/Update">Edit</a>
-   <form action="Client/@client.GetId()/Delete" method="post">
+   <p><a class="whiteLink" href="/Client/@Client.GetId()/Details">@Client.GetName()</a> <a href="/Client/@Client.GetId()/Update">Edit</a>
+   <form action="Client/@Client.GetId()/Delete" method="post">
      <button type="submit" class="btn btn-link">Delete Client</button>
    </form></p>
 }
-<form action='/Stylists/@Model["stylist"].GetId()' method='post'>
+<form action='/Stylist/@Model.GetId()' method='post'>
   <div class="form-group">
-      <input class="form-control" id='stylist-id' name='stylist-id' type='hidden' value='@Model["stylist"].GetId()'>
+      <input class="form-control" id='stylist-id' name='stylist-id' type='hidden' value='@Model.GetId()'>
       <label for='inputClient'>Enter New Client:</label>
       <input class="form-control" id='inputClient' name='inputClient' type='text' required>
       <button type="submit" class="btn btn-info btn-xs">Submit</button>
   </div>
 </form>
 
-<form action="/Clients/Delete" method="post">
-  @if (@Model["client"].Count !=  0) 
+<form action="/Stylist/@Model.GetId()/Clients/Delete" method="post">
+  @if (@Model.GetClients().Count !=  0) 
   {
     <button type="submit" class="btn btn-danger">Delete All Clients</button>
   } else 
