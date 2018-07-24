@@ -1,30 +1,59 @@
 <h1>@Model.GetName()'s clients</h1>
+<div class="row">
+  <div class="col-sm-6">
+    @foreach (var Client in Model.GetClients())
+    {
+      <p><a class="whiteLink" href="/Client/@Client.GetId()/Details">@Client.GetName()</a>
+      <form action="Client/@Client.GetId()/Delete" method="post">
+        <button type="submit" class="btn btn-link">Delete This Client</button>
+      </form></p>
+    }
+    <form action='/Stylist/@Model.GetId()/AddClient' method='post'>
+      <div class="form-group">
+          <input class="form-control" id='stylist-id' name='stylist-id' type='hidden' value='@Model.GetId()'>
+          <label for='inputClient'>Add Client:</label>
+          <input class="form-control" id='inputClient' name='inputClient' type='text' required>
+          <button type="submit" class="btn btn-info btn-xs">Submit</button>
+      </div>
+    </form>
 
-@foreach (var Client in Model.GetClients())
-{
-   <p><a class="whiteLink" href="/Client/@Client.GetId()/Details">@Client.GetName()</a>
-   <form action="Client/@Client.GetId()/Delete" method="post">
-     <button type="submit" class="btn btn-link">Delete Client</button>
-   </form></p>
-}
-<form action='/Stylist/@Model.GetId()/AddClient' method='post'>
-  <div class="form-group">
-      <input class="form-control" id='stylist-id' name='stylist-id' type='hidden' value='@Model.GetId()'>
-      <label for='inputClient'>Enter New Client:</label>
-      <input class="form-control" id='inputClient' name='inputClient' type='text' required>
-      <button type="submit" class="btn btn-info btn-xs">Submit</button>
+    <form action="/Stylist/@Model.GetId()/Clients/Delete" method="post">
+      @if (@Model.GetClients().Count !=  0) 
+      {
+        <button type="submit" class="btn btn-danger">Delete All of @Model.GetName()'s Clients</button>
+      } else 
+      {
+      }
+    </form>
+    <h1>@Model.GetName()'s clients</h1>
+    </div>
+    <div class="col-sm-6">
+    @foreach (var Specialty in Model.GetSpecialties())
+    {
+      <p><a class="whiteLink" href="/Specialty/@Specialty.GetId()/Details">@Specialty.GetName()</a>
+      <form action="Specialty/@Specialty.GetId()/Delete" method="post">
+        <button type="submit" class="btn btn-link">Delete This Specialty</button>
+      </form></p>
+    }
+    <form action='/Stylist/@Model.GetId()/AddSpecialty' method='post'>
+      <div class="form-group">
+          <input class="form-control" id='stylist-id' name='stylist-id' type='hidden' value='@Model.GetId()'>
+          <label for='inputSpecialty'>Enter New Stylist Specialty:</label>
+          <input class="form-control" id='inputSpecialty' name='inputSpecialty' type='text' required>
+          <button type="submit" class="btn btn-info btn-xs">Submit</button>
+      </div>
+    </form>
+
+    <form action="/Stylist/@Model.GetId()/Clients/Delete" method="post">
+      @if (@Model.GetSpecialties().Count !=  0) 
+      {
+        <button type="submit" class="btn btn-danger">Delete All of @Model.GetName()'s Specialties</button>
+      } else 
+      {
+      }
+    </form>
   </div>
-</form>
-
-<form action="/Stylist/@Model.GetId()/Clients/Delete" method="post">
-  @if (@Model.GetClients().Count !=  0) 
-  {
-    <button type="submit" class="btn btn-danger">Delete All Clients</button>
-  } else 
-  {
-  }
-</form>
-
+</div>
 <form action="/Stylists">
     <button type="submit" class="btn btn-info">View All Stylists</button>
 </form>
@@ -32,4 +61,3 @@
 <form action="/">
     <button type="submit" class="btn btn-info">Got To Homepage</button>
 </form>
-

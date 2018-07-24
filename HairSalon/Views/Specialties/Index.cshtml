@@ -1,0 +1,26 @@
+<h1>Specialties:</h1>
+@if (@Model.Count == 0) {
+<h4>No specialties have been added yet!</h4>
+} 
+@foreach (var Specialty in Model) {
+<p><a class="whiteLink" href="/Specialty/@Specialty.GetId()/Details">@Specialty.GetName()</a> <a href="/Specialty/@Specialty.GetId()/Update">Edit</a>
+<form action="/Specialty/@Specialty.GetId()/Delete" method="post">
+    <button type="submit" class="btn btn-link">Delete Specialty</button>
+</form></p>
+}
+
+<form action="/Specialties/NewSpecialty" method="post">
+    <div class="form-group">
+        <label for="inputSpecialty">Add Specialty:</label>
+        <input class="form-control" name="inputSpecialty" id="inputSpecialty" required>
+        <button type="submit" class="btn btn-info btn-xs">Submit</button>
+    </div>
+</form>
+
+<form action="/Specialties/Delete" method="post">
+    <button type="submit" class="btn btn-danger">Delete All Specialties</button>
+</form>
+
+<form action="/">
+    <button type="submit" class="btn btn-info">Got To Homepage</button>
+</form>

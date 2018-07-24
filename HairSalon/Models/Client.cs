@@ -34,7 +34,7 @@ namespace HairSalon.Models {
         }
 
         public override int GetHashCode () {
-            return this.GetName ().GetHashCode ();
+            return this.GetId ().GetHashCode ();
         }
 
         public void Save () {
@@ -205,7 +205,7 @@ namespace HairSalon.Models {
             MySqlConnection conn = DB.Connection ();
             conn.Open ();
 
-            MySqlCommand cmd = new MySqlCommand(@"DELETE FROM clients; Delete From clients_stylists", conn);
+            MySqlCommand cmd = new MySqlCommand(@"DELETE FROM clients; Delete From clients_stylists;", conn);
 
             cmd.ExecuteNonQuery ();
             conn.Close ();

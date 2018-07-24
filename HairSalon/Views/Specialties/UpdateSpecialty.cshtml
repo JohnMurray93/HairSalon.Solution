@@ -1,0 +1,12 @@
+<p>
+    <h4>Current Name:</h4>
+    <h5>@Model.GetName()</h5>
+</p>
+<br>
+<br>
+<form action="/Specialty/@Model.GetId()/Update" method="post">
+    <label for="new-name">Edit Name:</label>
+    <input type="text" name="new-name">
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>
+<a href="/Specialties">Back to Specialties</a>
